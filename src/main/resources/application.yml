@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/userbd
+    username: postgres
+    password: user
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug

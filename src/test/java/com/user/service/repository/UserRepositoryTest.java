@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserRepositoryTest {
 
-    private final static int userId = 1;
+    private final static int userId = 2;
     private final static Logger log = LoggerFactory.getLogger(UserRepositoryTest.class);
 
     String message = "Prueba";
@@ -45,12 +45,17 @@ class UserRepositoryTest {
         assertFalse(userOptional.isPresent(), "El cliente con email: " + userId + " ya existe.");
 
         User user = new User();
-        user.setFirstname("Alejandro");
+        user.setFirstName("Juan");
+        user.setLastName("Gil");
 
-        Date dateOfBirth = Date.valueOf("1999-06-19");
+        Date dateOfBirth = Date.valueOf("1996-01-12");
         user.setDateBirth(dateOfBirth);
 
-        user.setRole(Role.ADMIN);
+        user.setAddress("Avenida Prueba");
+        user.setPassword("X21");
+        user.setPhone("654");
+        user.setEmail("prueba@gmail.com");
+        user.setRole(Role.USER);
 
         userRepository.save(user);
 
@@ -115,7 +120,7 @@ class UserRepositoryTest {
 
         //Forma funcional (Lambda)
         userRepository.findAll().forEach(user -> {
-            log.info("Nombre: " +user.getFirstname());
+            log.info("Nombre: " +user.getFirstName());
             log.info("Fecha: " + user.getDateBirth());
         });;
     }
@@ -137,11 +142,11 @@ class UserRepositoryTest {
 
         log.info(message);
 
-        List<User> userList = userRepository.findByFirstnameAndRole("Alejandro", Role.ADMIN);
+        List<User> userList = userRepository.findByFirstNameAndRole("Juan", Role.ADMIN);
         assertFalse(userList.isEmpty());
 
         userList.forEach(user -> {
-            log.info("Nombre: " + user.getFirstname());
+            log.info("Nombre: " + user.getFirstName());
             log.info("Rol: " + user.getRole());
         });
     }
@@ -157,7 +162,7 @@ class UserRepositoryTest {
         assertFalse(userList.isEmpty());
 
         userList.forEach(user->{
-            log.info("Nombre: " + user.getFirstname());
+            log.info("Nombre: " + user.getFirstName());
             log.info("Rol: " + user.getRole());
         });
     }

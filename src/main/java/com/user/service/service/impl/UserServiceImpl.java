@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException
                         ("The user with ID: " + userId + " was not found."));
 
-        existingUser.setFirstname(updateUserDto.getFirstName());
+        existingUser.setFirstName(updateUserDto.getFirstName());
         existingUser.setLastName(updateUserDto.getLastName());
         existingUser.setDateBirth(updateUserDto.getDateBirth());
         existingUser.setAddress(updateUserDto.getAddress());

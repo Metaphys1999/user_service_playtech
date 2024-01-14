@@ -36,11 +36,11 @@ class TestUserJPQL {
     @Test
     public void selectWhereActive() {
         logger.info(message);
-        String jpql = "SELECT user FROM User user WHERE user.userStatus = 'ACTIVE' ORDER BY user.firstname";
+        String jpql = "SELECT user FROM User user WHERE user.role = 'ACTIVE' ORDER BY user.firstName";
         List<User> userList = entityManager.createQuery(jpql, User.class).getResultList();
 
         userList.forEach(user -> {
-            logger.info(user.getFirstname());
+            logger.info(user.getFirstName());
             logger.info("" + user.getRole());
         });
     }
@@ -48,15 +48,15 @@ class TestUserJPQL {
     @Test
     public void selectWhereParam() {
         logger.info(message);
-        String jpql = "SELECT user FROM User user WHERE user.userStatus =: status AND user.firstname =: name"; //Consultas (AND) where con uso de parametros
+        String jpql = "SELECT user FROM User user WHERE user.role =: role AND user.firstName =: name"; //Consultas (AND) where con uso de parametros
         List<User> userList = entityManager.
                 createQuery(jpql, User.class).
-                setParameter("status", Role.ADMIN).
+                setParameter("role", Role.ADMIN).
                 setParameter("name", "Alejo").
                 getResultList();
 
         userList.forEach(user -> {
-            logger.info(user.getFirstname());
+            logger.info(user.getFirstName());
             logger.info("" + user.getRole());
         });
     }
@@ -64,11 +64,11 @@ class TestUserJPQL {
     @Test
     public void selectLike() {
         logger.info(message);
-        String jpql = "SELECT user FROM User user WHERE user.firstname LIKE 'Juan%'"; //Si se va a buscar un caracter en cualquier parte de los campos se usa %a% DemoController %am% (Por ejemplo)
+        String jpql = "SELECT user FROM User user WHERE user.firstName LIKE 'Juan%'"; //Si se va a buscar un caracter en cualquier parte de los campos se usa %a% DemoController %am% (Por ejemplo)
         List<User> userList = entityManager.createQuery(jpql, User.class).getResultList();
 
         userList.forEach(user -> {
-            logger.info(user.getFirstname());
+            logger.info(user.getFirstName());
         });
     }
 
@@ -79,7 +79,7 @@ class TestUserJPQL {
         List<User> userList = entityManager.createQuery(jpql, User.class).getResultList(); /*Retorna una lista de
 																									Customer que hay en la BD*/
         userList.forEach(user -> { // Esta es una forma de recorrer el arreglo con programacion funcional (Lambda)
-            logger.info(user.getFirstname());
+            logger.info(user.getFirstName());
             logger.info("" + user.getRole());
         });
     }

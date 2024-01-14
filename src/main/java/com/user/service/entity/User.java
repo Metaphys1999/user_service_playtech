@@ -12,7 +12,7 @@ import java.sql.Date;
 
 @Entity
 @Builder
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "users_phone_ukey", columnNames = {"mobile_phone"})})
 public class User {
 
     @Id
@@ -23,7 +23,7 @@ public class User {
     @NotNull(message = "The first name cannot be null")
     @NotBlank(message = "The first name cannot be blank")
     @Column(name = "first_name", nullable = false, columnDefinition = "VARCHAR")
-    private String firstname;
+    private String firstName;
 
     @NotNull(message = "The last name cannot be null")
     @NotBlank(message = "The last name cannot be blank")
@@ -74,12 +74,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

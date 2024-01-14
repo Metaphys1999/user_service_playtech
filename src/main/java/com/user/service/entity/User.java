@@ -23,7 +23,7 @@ public class User {
     @NotNull(message = "The first name cannot be null")
     @NotBlank(message = "The first name cannot be blank")
     @Column(name = "first_name", nullable = false, columnDefinition = "VARCHAR")
-    private String firstName;
+    private String firstname;
 
     @NotNull(message = "The last name cannot be null")
     @NotBlank(message = "The last name cannot be blank")
@@ -74,12 +74,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastName() {

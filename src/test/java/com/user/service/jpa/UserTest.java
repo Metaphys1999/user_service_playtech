@@ -41,7 +41,7 @@ class UserTest {
 
         user = new User();
         user.setUserId(1);
-        user.setFirstName("Juan");
+        user.setFirstname("Juan");
         user.setLastName("Gil");
 
         Date dateOfBirth = Date.valueOf("1999-06-19");

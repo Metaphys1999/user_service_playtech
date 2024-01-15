@@ -3,7 +3,10 @@ package com.user.service.controller;
 import com.user.service.dto.CreateUserDto;
 import com.user.service.dto.GetUserDto;
 import com.user.service.dto.UpdateUserDto;
+import com.user.service.entity.LoginRequest;
 import com.user.service.entity.User;
+import com.user.service.response.AuthResponse;
+import com.user.service.service.contract.AuthService;
 import com.user.service.service.contract.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +22,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthService authService;
 
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
 
     @PostMapping
     public ResponseEntity<CreateUserDto> createUser(@RequestBody CreateUserDto createUserDto) {

@@ -6,6 +6,7 @@ import com.user.service.dto.UpdateUserDto;
 import com.user.service.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -18,4 +19,5 @@ public interface UserService {
     List<GetUserDto> getUsers();
 
     String deleteUser(Integer userId);
+
 }

@@ -1,8 +1,18 @@
-package com.user.service.dto;
+package com.user.service.entity;
+
+import com.user.service.role.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
-public class UpdateUserDto {
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RegisterRequest {
 
     private String firstName;
     private String lastName;
@@ -11,9 +21,7 @@ public class UpdateUserDto {
     private String password;
     private String phone;
     private String email;
-
-    public UpdateUserDto() {
-    }
+    private Role role;
 
     public String getFirstName() {
         return firstName;
@@ -69,5 +77,13 @@ public class UpdateUserDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -6,19 +6,22 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
-import lombok.Builder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-@Builder
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "users_phone_ukey", columnNames = {"mobile_phone"})})
-public class User {
+public class User implements UserDetails {
 
     @Id
     @Column(name = "id", columnDefinition = "INT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Integer userId;
 
     @NotNull(message = "The first name cannot be null")
     @NotBlank(message = "The first name cannot be blank")
@@ -40,8 +43,6 @@ public class User {
     @Column(name = "address", nullable = false)
     private String address;
 
-    // private String token;
-
     @NotNull(message = "The password cannot be null")
     @NotBlank(message = "The password cannot be blank")
     @Column(name = "password", length = 120, nullable = false)
@@ -62,6 +63,36 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     Role role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return phone;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public User() {
     }
